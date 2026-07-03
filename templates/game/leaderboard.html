@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="page-title">Таблица лидеров</h1>
+
+    <div class="period-tabs">
+        <button class="tab-btn active" data-period="daily">День</button>
+        <button class="tab-btn" data-period="weekly">Неделя</button>
+        <button class="tab-btn" data-period="alltime">Всё время</button>
+    </div>
+
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Игрок</th>
+                <th>Очки</th>
+                <th>Точность</th>
+                <th>Среднее время</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadLeaderboard(period) {
+    const response = await fetch(`/api/leaderboard/?period=${period}`);
+    const data = await response.json();
+
+    const tbody = document.getElementById('leaderboardBody');
+
+    if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">Нет данных</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = data.map(entry => `
+        <tr>
+            <td>${entry.rank}</td>
+            <td>${entry.username}</td>
+            <td>${entry.score}</td>
+            <td>${entry.accuracy_rate.toFixed(0)}%</td>
+            <td>${entry.avg_time.toFixed(1)} сек</td>
+        </tr>
+    `).join('');
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadLeaderboard(btn.dataset.period);
+    });
+});
+
+loadLeaderboard('daily');
+</script>
+{% endblock %}

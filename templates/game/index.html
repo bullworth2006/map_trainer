@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="game-container">
+    <div id="map"></div>
+    
+    <div class="sidebar">
+        <div class="mode-label" id="modeLabel"></div>
+
+        <div class="address-card" id="addressCard" style="display:none;">
+            <div class="address-label">Найди адрес</div>
+            <div class="address-text" id="addressText"></div>
+        </div>
+
+        <div class="timer-card" id="timerCard" style="display:none;">
+            <div class="timer-value" id="timerValue">00.0</div>
+        </div>
+
+        <div class="sprint-card" id="sprintCard" style="display:none;">
+            <div class="sprint-label">Осталось времени</div>
+            <div class="sprint-value" id="sprintValue">60</div>
+        </div>
+
+        <div class="score-card">
+            <div class="score-label">Очки</div>
+            <div class="score-value" id="scoreValue">0</div>
+            <div class="combo-value" id="comboValue"></div>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-distance" id="resultDistance"></div>
+            <div class="result-score" id="resultScore"></div>
+        </div>
+
+        <div class="final-card" id="finalCard" style="display:none;">
+            <h3>Готово!</h3>
+            <p>Итоговый счёт: <span id="finalScore"></span></p>
+            <p>Раундов сыграно: <span id="finalRounds"></span></p>
+            <a href="/" class="btn-start" style="display:block; text-align:center; text-decoration:none; margin-top:12px;">Назад в меню</a>
+        </div>
+
+        <button class="btn-start" id="startBtn">Начать игру</button>
+        <button class="btn-next" id="nextBtn">Следующий раунд</button>
+        <div class="hotkeys-hint">
+            <span>Enter — старт/далее</span>
+            <span>+ / — — зум</span>
+            <span>R — сбросить вид</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/game.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,546 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0D1117;
+    color: #E6EDF3;
+}
+
+/* Навбар */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: #161B22;
+    border-bottom: 1px solid #30363D;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F5A623;
+}
+
+.username {
+    margin-right: 16px;
+    color: #8B949E;
+}
+
+.btn-logout {
+    color: #8B949E;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #30363D;
+    border-radius: 6px;
+}
+
+.btn-logout:hover {
+    color: #E6EDF3;
+    border-color: #8B949E;
+}
+
+/* Игровой экран */
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    height: calc(100vh - 57px);
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Панель справа */
+.sidebar {
+    background: #161B22;
+    border-left: 1px solid #30363D;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.address-card {
+    background: #1E2733;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #30363D;
+}
+
+.address-label {
+    font-size: 12px;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.address-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #E6EDF3;
+}
+
+/* Таймер */
+.timer-card {
+    background: #1E2733;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #30363D;
+    text-align: center;
+}
+
+.timer-value {
+    font-family: 'Courier New', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    color: #F5A623;
+}
+
+.timer-value.danger {
+    color: #EF4444;
+    animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Счёт */
+.score-card {
+    background: #1E2733;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #30363D;
+    text-align: center;
+}
+
+.score-label {
+    font-size: 12px;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #22C55E;
+}
+
+.combo-value {
+    font-size: 14px;
+    color: #F5A623;
+    margin-top: 4px;
+}
+
+/* Результат раунда */
+.result-card {
+    background: #1E2733;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #30363D;
+    display: none;
+}
+
+.result-card.show {
+    display: block;
+}
+
+.result-distance {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.result-distance.good { color: #22C55E; }
+.result-distance.ok { color: #F5A623; }
+.result-distance.bad { color: #EF4444; }
+
+.result-score {
+    text-align: center;
+    font-size: 14px;
+    color: #8B949E;
+    margin-top: 4px;
+}
+
+/* Кнопки */
+.btn-start {
+    background: #F5A623;
+    color: #0D1117;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-start:hover {
+    background: #E09520;
+}
+
+.btn-next {
+    background: #22C55E;
+    color: #0D1117;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    display: none;
+}
+
+.btn-next.show {
+    display: block;
+}
+
+.nav-link {
+    color: #8B949E;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+.nav-link:hover {
+    color: #F5A623;
+}
+
+/* Страницы статистики и лидерборда */
+.page-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.page-title {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #E6EDF3;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.stat-card {
+    background: #1E2733;
+    border: 1px solid #30363D;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #F5A623;
+}
+
+
+/* Лидерборд */
+.period-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    background: #1E2733;
+    border: 1px solid #30363D;
+    color: #8B949E;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tab-btn.active {
+    background: #F5A623;
+    color: #0D1117;
+    border-color: #F5A623;
+    font-weight: 600;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1E2733;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid #30363D;
+}
+
+.leaderboard-table th {
+    background: #161B22;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #8B949E;
+    letter-spacing: 1px;
+}
+
+.leaderboard-table tbody tr:hover {
+    background: #21262D;
+}
+
+.leaderboard-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.setup-section {
+    margin-bottom: 32px;
+}
+
+.setup-section h3 {
+    font-size: 14px;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.option-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.option-btn {
+    background: #1E2733;
+    border: 1px solid #30363D;
+    color: #E6EDF3;
+    padding: 16px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    flex: 1;
+    min-width: 140px;
+}
+
+.option-btn small {
+    display: block;
+    font-size: 11px;
+    color: #8B949E;
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.option-btn.active {
+    background: #F5A623;
+    color: #0D1117;
+    border-color: #F5A623;
+}
+
+.option-btn.active small {
+    color: #0D1117;
+}
+
+.mode-label {
+    font-size: 13px;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.sprint-card {
+    background: #1E2733;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #30363D;
+    text-align: center;
+}
+
+.sprint-label {
+    font-size: 12px;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.sprint-value {
+    font-family: 'Courier New', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    color: #EF4444;
+}
+
+.final-card {
+    background: #1E2733;
+    border-radius: 10px;
+    padding: 24px;
+    border: 1px solid #30363D;
+    text-align: center;
+}
+
+.final-card h3 {
+    color: #22C55E;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.final-card p {
+    color: #8B949E;
+    margin: 6px 0;
+}
+
+.final-card span {
+    color: #F5A623;
+    font-weight: 700;
+}
+
+
+.hotkeys-hint {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #30363D;
+}
+
+.hotkeys-hint span {
+    font-size: 11px;
+    color: #484F58;
+}
+
+/*Авторизация*/
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0D1117;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: #161B22;
+    border: 1px solid #30363D;
+    border-radius: 12px;
+    padding: 36px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 28px;
+    color: #F5A623;
+    font-size: 28px;
+}
+
+.auth-form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.auth-form label {
+    margin-bottom: 8px;
+    color: #8B949E;
+    font-size: 14px;
+}
+
+.auth-form input {
+    padding: 12px;
+    border: 1px solid #30363D;
+    border-radius: 8px;
+    background: #0D1117;
+    color: #E6EDF3;
+    font-size: 15px;
+    transition: .2s;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #F5A623;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #F5A623;
+    color: #0D1117;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+    margin-top: 10px;
+}
+
+.btn-auth:hover {
+    background: #E09520;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-links a {
+    color: #8B949E;
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    color: #F5A623;
+}
+
+.auth-message {
+    text-align: center;
+    color: #8B949E;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.btn-auth-link {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: #22C55E;
+    color: #0D1117;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.btn-auth-link:hover {
+    background: #16A34A;
+}

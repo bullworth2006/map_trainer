@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="page-title">Моя статистика</h1>
+
+    <div class="stats-grid" id="statsGrid">
+        <p>Загрузка...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadStats() {
+    const response = await fetch('/api/stats/');
+    if (!response.ok) {
+        document.getElementById('statsGrid').innerHTML = '<p>Нет данных. Сыграй хотя бы один раунд!</p>';
+        return;
+    }
+    const data = await response.json();
+
+    document.getElementById('statsGrid').innerHTML = `
+        <div class="stat-card">
+            <div class="stat-label">Всего раундов</div>
+            <div class="stat-value">${data.total_rounds}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Средняя ошибка</div>
+            <div class="stat-value">${data.avg_distance.toFixed(1)} м</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Среднее время</div>
+            <div class="stat-value">${data.avg_time.toFixed(1)} сек</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Лучший результат</div>
+            <div class="stat-value">${data.best_score}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Точность</div>
+            <div class="stat-value">${data.accuracy_rate.toFixed(0)}%</div>
+        </div>
+    `;
+}
+
+loadStats();
+</script>
+{% endblock %}

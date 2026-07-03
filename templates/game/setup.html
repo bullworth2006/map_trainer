@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="page-title">Выбери режим</h1>
+
+    <div class="setup-section">
+        <h3>Режим игры</h3>
+        <div class="option-group" id="modeGroup">
+            <button class="option-btn active" data-mode="training">Тренировка<br><small>без ограничений</small></button>
+            <button class="option-btn" data-mode="exam">Экзамен<br><small>10 заданий, итоговая оценка</small></button>
+            <button class="option-btn" data-mode="sprint">Спринт<br><small>60 секунд, максимум точек</small></button>
+        </div>
+    </div>
+
+    <div class="setup-section">
+        <h3>Сложность</h3>
+        <div class="option-group" id="difficultyGroup">
+            <button class="option-btn active" data-difficulty="easy">Лёгкий</button>
+            <button class="option-btn" data-difficulty="medium">Средний</button>
+            <button class="option-btn" data-difficulty="hard">Сложный</button>
+        </div>
+    </div>
+
+    <div class="setup-section">
+        <h3>Дополнительно</h3>
+        <div class="option-group" id="extraGroup">
+            <button class="option-btn" data-extra="nozoom">
+                Без зума<br><small>фиксированный масштаб</small>
+            </button>
+        </div>
+    </div>
+
+    <button class="btn-start" id="goBtn">Начать</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let selectedMode = 'training';
+let selectedDifficulty = 'easy';
+let extraMode = '';
+
+document.querySelectorAll('#modeGroup .option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#modeGroup .option-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedMode = btn.dataset.mode;
+    });
+});
+
+document.querySelectorAll('#difficultyGroup .option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#difficultyGroup .option-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedDifficulty = btn.dataset.difficulty;
+    });
+});
+
+document.querySelectorAll('#extraGroup .option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) {
+            btn.classList.remove('active');
+            extraMode = '';
+        } else {
+            btn.classList.add('active');
+            extraMode = btn.dataset.extra;
+        }
+    });
+});
+
+document.getElementById('goBtn').addEventListener('click', () => {
+    let url = `/play/?mode=${selectedMode}&difficulty=${selectedDifficulty}`;
+    if (extraMode) url += `&extra=${extraMode}`;
+    window.location.href = url;
+});
+</script>
+{% endblock %}
